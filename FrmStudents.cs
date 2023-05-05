@@ -21,5 +21,17 @@ namespace Evaluation_Manager
         {
 
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ShowStudents();
+        }
+
+        private void ShowStudents(){
+        { 
+            StudentRepository repository = new StudentRepository();
+            List<Student> students = repository.GetStudents();
+            dgvStudents.DataSource = students;
+        }
     }
 }
