@@ -12,9 +12,18 @@ namespace Evaluation_Manager
     {
         private Student CreateObject(SqlDataReader reader)
         {
-            Student student = new Student();
+            int id = int.Parse(reader["Id"].ToString());
+            string firstName = reader["FirstName"].ToString();
+            string lastName = reader["LastName"].ToString();
+            int.TryParse(reader["Grade"].ToString(), out int grade);
+            var student = new Student {
+                Id = id,
+                FirstName = firstName,
+                LastName = lastName,
+                Grade = grade
+            };
+            return student;
 
-            return null;
         }
 
         public Student GetStudent(int id)
@@ -25,7 +34,6 @@ namespace Evaluation_Manager
             if (reader.HasRows) {
                 reader.Read();
                 student = CreateObject(reader);
-
                 reader.Close();
             }
 

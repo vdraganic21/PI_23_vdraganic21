@@ -24,14 +24,23 @@ namespace Evaluation_Manager
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            ShowStudents();
+
         }
 
-        private void ShowStudents(){
+        private void ShowStudents()
         { 
             StudentRepository repository = new StudentRepository();
             List<Student> students = repository.GetStudents();
             dgvStudents.DataSource = students;
+
+            dgvStudents.Columns["Id"].DisplayIndex = 0;
+            dgvStudents.Columns["FirstName"].DisplayIndex = 1;
+            dgvStudents.Columns["LastName"].DisplayIndex = 2;
+            dgvStudents.Columns["Grade"].DisplayIndex = 3;
+        }
+
+        private void FrmStudents_Load(object sender, EventArgs e) {
+            ShowStudents();
         }
     }
 }
