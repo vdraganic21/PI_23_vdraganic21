@@ -42,5 +42,19 @@ namespace Evaluation_Manager
         private void FrmStudents_Load(object sender, EventArgs e) {
             ShowStudents();
         }
+
+        private void btnEvaluateStudent_Click(object sender, EventArgs e)
+        {
+            if (dgvStudents.SelectedRows.Count > 0)
+            {
+                Student selectedStudent = dgvStudents.CurrentRow.DataBoundItem as Student;
+
+                if (selectedStudent != null)
+                {
+                    frmEvaluation frmEvaluation = new frmEvaluation(selectedStudent);
+                    frmEvaluation.ShowDialog();
+                }
+            }
+        }
     }
 }
