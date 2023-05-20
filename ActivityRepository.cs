@@ -14,7 +14,7 @@ namespace Evaluation_Manager
         {
             Activity aktivnost = new Activity();
 
-            aktivnost.Id = Convert.ToInt32(reader["Id"].ToString());
+            aktivnost.Id = int.Parse(reader["Id"].ToString());
             aktivnost.Name = reader["Name"].ToString();
             aktivnost.Description = reader["Description"].ToString();
 
@@ -33,7 +33,7 @@ namespace Evaluation_Manager
         {
             Activity aktivnost = null;
             DB.OpenConnection();
-            SqlDataReader reader = DB.GetDataReader($"SELECT * FROM Activity WHERE id = {id}");
+            SqlDataReader reader = DB.GetDataReader($"SELECT * FROM Activities WHERE id = {id}");
             if (reader.HasRows)
             {
                 reader.Read();
