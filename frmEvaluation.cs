@@ -84,12 +84,43 @@ namespace Evaluation_Manager
         private void cboActivities_SelectedIndexChanged(object sender, EventArgs e)
         {
             var selectedActivity = cboActivities.SelectedItem as Activity;
-            txtActivityDescription.Text = selectedActivity.Description;
-            txtMinForGrade.Text = selectedActivity.MinPointsForGrade + " / " + selectedActivity.MaxPoints;
-            txtMinForSignature.Text = selectedActivity.MinPointsForSignature + " / " + selectedActivity.MaxPoints;
+            if (selectedActivity != null)
+            {
+                txtActivityDescription.Text = selectedActivity.Description;
+                txtMinForGrade.Text = selectedActivity.MinPointsForGrade + " / " + selectedActivity.MaxPoints;
+                txtMinForSignature.Text = selectedActivity.MinPointsForSignature + " / " + selectedActivity.MaxPoints;
 
-            numPoints.Minimum = 0;
-            numPoints.Maximum = selectedActivity.MaxPoints;
+                numPoints.Minimum = 0;
+                numPoints.Maximum = selectedActivity.MaxPoints;
+
+                numPoints.Minimum = 0;
+                numPoints.Maximum = selectedActivity.MaxPoints;
+
+                var evaluation = EvaluationRepository.GetEvaluation(selectedStudent, selectedActivity);
+                if (evaluation != null)
+                {
+                    txtTeacher.Text = evaluation.Evaluator.ToString();
+                    txtEvaluationDate.Text = evaluation.EvaluationDate.ToString();
+                    numPoints.Value = evaluation.Points;
+                } 
+                else
+                {
+                    txtTeacher.Text = FrmLogin.LoggedTeacher.ToString();
+                    txtEvaluationDate.Text = "-";
+                    numPoints.Value = 0;
+                }
+            }
+
+
+            
+        }
+
+        private void btnSave_Click(object sender, EventArgs e) {
+            var activity = cboActivities.SelectedItem as Activity;
+            var teacher = FrmLogin.LoggedTeacher;
+            int points = (int)numPoints.Value;
+            teacher.PerformEvaluation(selectedStudent, activity, points);
+            Close();
         }
     }
 }
