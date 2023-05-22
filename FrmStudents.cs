@@ -56,5 +56,11 @@ namespace Evaluation_Manager
                 }
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FrmFinalReport frmFinalReport = new FrmFinalReport();
+            frmFinalReport.ShowDialog();
+        }
     }
 }

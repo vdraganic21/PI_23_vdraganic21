@@ -122,5 +122,10 @@ namespace Evaluation_Manager
             teacher.PerformEvaluation(selectedStudent, activity, points);
             Close();
         }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
